@@ -43,7 +43,8 @@ def groq_generate(prompt: str, max_new_tokens: int = 800) -> str:
         json=payload,
         timeout=60
     )
-    r.raise_for_status()
+    if not r.ok:
+        raise ValueError(f"Groq API Error: {r.status_code} - {r.text}")
     return r.json()["choices"][0]["message"]["content"]
 
 
