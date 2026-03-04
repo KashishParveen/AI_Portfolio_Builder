@@ -13,7 +13,7 @@ except ImportError:
     pass
 
 HF_TOKEN = os.getenv("HF_TOKEN", "")
-MODEL    = os.getenv("HF_MODEL", "mistralai/Mistral-7B-Instruct-v0.3")
+MODEL = os.getenv("HF_MODEL", "google/flan-t5-large")
 
 
 def hf_generate(prompt: str, max_new_tokens: int = 800) -> str:
