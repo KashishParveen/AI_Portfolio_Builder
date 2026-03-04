@@ -1,5 +1,5 @@
 """
-LLM utility - calls Groq API (fast & free).
+LLM utility - Groq API (free & fast)
 """
 import os
 import requests
@@ -11,15 +11,19 @@ except ImportError:
     pass
 
 GROQ_API_KEY = os.getenv("GROQ_API_KEY", "")
-MODEL = "llama3-8b-8192"  # Free model on Groq
+MODEL = "llama3-8b-8192"
 
 
 def groq_generate(prompt: str, max_new_tokens: int = 1000) -> str:
     if not GROQ_API_KEY:
-        return '[DEV MODE - set GROQ_API_KEY in .env]'
+        raise ValueError("GROQ_API_KEY not set. Add it in Space Settings > Secrets.")
 
-    # Cap max_tokens to safe limit for llama3-8b-8192
-    safe_tokens = min(max_new_tokens, 2048)
+    # Truncate prompt if too long
+    if len(prompt) > 6000:
+        prompt = prompt[:6000]
+
+    # Cap response tokens safely
+    safe_tokens = min(max_new_tokens, 1500)
 
     headers = {
         "Authorization": f"Bearer {GROQ_API_KEY}",
