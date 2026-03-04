@@ -1,3 +1,12 @@
+---
+title: AI Portfolio Builder
+emoji: 🚀
+colorFrom: blue
+colorTo: purple
+sdk: docker
+app_file: app.py
+pinned: false
+---
 # PortfolioAI — AI Resume & Portfolio Builder
 ### IBM SkillsBuild × Edunet Foundation Internship Project
 
