@@ -18,6 +18,9 @@ def groq_generate(prompt: str, max_new_tokens: int = 1000) -> str:
     if not GROQ_API_KEY:
         return '[DEV MODE - set GROQ_API_KEY in .env]'
 
+    # Cap max_tokens to safe limit for llama3-8b-8192
+    safe_tokens = min(max_new_tokens, 2048)
+
     headers = {
         "Authorization": f"Bearer {GROQ_API_KEY}",
         "Content-Type": "application/json"
@@ -25,7 +28,7 @@ def groq_generate(prompt: str, max_new_tokens: int = 1000) -> str:
     payload = {
         "model": MODEL,
         "messages": [{"role": "user", "content": prompt}],
-        "max_tokens": max_new_tokens,
+        "max_tokens": safe_tokens,
         "temperature": 0.7
     }
 
