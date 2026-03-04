@@ -11,7 +11,7 @@ except ImportError:
     pass
 
 GROQ_API_KEY = os.getenv("GROQ_API_KEY", "")
-MODEL = "llama3-8b-8192"
+MODEL = "llama3-70b-8192"
 
 
 def groq_generate(prompt: str, max_new_tokens: int = 800) -> str:
